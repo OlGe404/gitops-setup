@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: tekton-pipelines
+sortOptions:
+  order: fifo
+
+commonAnnotations:
+  origin: https://github.com/OlGe404/gitops-landscape/local-dev/tekton-pipelines
+
+commonLabels:
+  gitops-stage: local-dev
+
+resources:
+  - https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.50.0/release.yaml
