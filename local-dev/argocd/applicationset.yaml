@@ -10,9 +10,11 @@ spec:
         revision: HEAD
         directories:
           - path: local-dev/*
+
   template:
     metadata:
       name: "{{ path.basename }}"
+
     spec:
       project: default
       source:
