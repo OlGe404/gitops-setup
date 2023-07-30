@@ -10,6 +10,8 @@ commonLabels:
 
 resources:
   - https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+  - nodeport-service.yaml
+  - admin-clusterrolebinding.yaml
 
 patches:
-  - path: patches.yaml
+  - path: dashboard-patch.yaml

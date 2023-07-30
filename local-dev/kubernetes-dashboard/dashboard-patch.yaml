@@ -5,6 +5,10 @@ metadata:
   name: kubernetes-dashboard
   namespace: kubernetes-dashboard
 spec:
+  selector:
+    matchLabels:
+      k8s-app: kubernetes-dashboard
+
   template:
     spec:
       containers:
