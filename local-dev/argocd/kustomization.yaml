@@ -12,7 +12,10 @@ commonLabels:
   gitops-stage: local-dev
 
 resources:
-  - namespace.yaml
+  - base/namespace.yaml
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.9/manifests/install.yaml
-  - nodeport-service.yaml
-  - applicationset.yaml
+  - base/nodeport-service.yaml
+  - base/applicationset.yaml
+
+patches:
+  - path: patches/argocd-cm.yaml
