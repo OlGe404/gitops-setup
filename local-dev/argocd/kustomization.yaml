@@ -13,6 +13,6 @@ commonLabels:
 
 resources:
   - namespace.yaml
-  - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.9/manifests/install.yaml
   - nodeport-service.yaml
   - applicationset.yaml
