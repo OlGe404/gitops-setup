@@ -9,6 +9,7 @@ commonAnnotations:
 
 commonLabels:
   gitops-stage: local-dev
+  app.kubernetes.io/instance: tekton-pipelines
 
 resources:
   - https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.50.0/release.yaml
