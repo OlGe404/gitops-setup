@@ -9,6 +9,7 @@ commonAnnotations:
 
 commonLabels:
   gitops-stage: local-dev
+  app.kubernetes.io/instance: tekton-triggers
 
 resources:
   - https://storage.googleapis.com/tekton-releases/triggers/previous/v0.24.1/release.yaml
