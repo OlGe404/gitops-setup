@@ -13,10 +13,10 @@ commonLabels:
 
 resources:
   - base/namespace.yaml
-  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.9/manifests/install.yaml
+  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.9/manifests/ha/install.yaml
   - base/nodeport-service.yaml
   - base/applicationset.yaml
 
 patches:
   - path: patches/argocd-cm.yaml
-  # - path: patches/argocd-initial-admin-secret.yaml
+  # - path: patches/argocd-secret.yaml
