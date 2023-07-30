@@ -2,7 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: kubernetes-dashboard
-
 commonAnnotations:
   origin: https://github.com/OlGe404/gitops-landscape/local-dev/kubernetes-dashboard
 
@@ -11,5 +10,6 @@ commonLabels:
 
 resources:
   - https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
-# patches:
-#   - path: patches.yaml
+
+patches:
+  - path: patches.yaml
