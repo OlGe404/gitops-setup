@@ -9,7 +9,7 @@ commonAnnotations:
   origin: https://github.com/OlGe404/gitops-landscape/local-dev/argocd
 
 commonLabels:
-  stage: local-dev
+  gitops-stage: local-dev
 
 resources:
   - namespace.yaml
