@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonAnnotations:
+  origin: https://github.com/OlGe404/gitops-landscape/local-dev/kube-prometheus-stack
+
+commonLabels:
+  gitops-stage: local-dev
+
+resources:
+  - base/namespace.yaml
+
+helmCharts:
+  - name: prometheus-community/kube-prometheus-stack
+    repo: https://prometheus-community.github.io/helm-charts
+    version: 48.2.2
+    releaseName: kube-prometheus-stack
+    namespace: kube-prometheus-stack
+    valuesFile: values.yaml
