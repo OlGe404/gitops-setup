@@ -11,4 +11,5 @@ commonLabels:
 
 resources:
   - base/namespace.yaml
+  - base/nodeport-service.yaml
   - https://storage.googleapis.com/tekton-releases/dashboard/previous/v0.38.0/release.yaml
