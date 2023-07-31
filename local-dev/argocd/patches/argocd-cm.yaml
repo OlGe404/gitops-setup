@@ -5,3 +5,4 @@ metadata:
   name: argocd-cm
 data:
   timeout.reconciliation: 60s
+  kustomize.buildOptions: --enable-helm
