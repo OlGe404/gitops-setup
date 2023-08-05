@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: local-dev
+  name: localhost
 spec:
   generators:
     - git:
         repoURL: https://github.com/OlGe404/gitops-landscape.git
         revision: HEAD
         directories:
-          - path: local-dev/*
+          - path: localhost/*
 
   template:
     metadata:
@@ -33,3 +33,6 @@ spec:
 
         syncOptions:
           - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true
+          - Validate=false
+          - FailOnSharedResource=true

@@ -2,11 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-commonAnnotations:
-  origin: https://github.com/OlGe404/gitops-landscape/local-dev/tekton-pipelines
-
 commonLabels:
-  gitops-stage: local-dev
   app.kubernetes.io/instance: tekton-pipelines
 
 resources:
