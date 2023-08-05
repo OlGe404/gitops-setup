@@ -18,6 +18,5 @@ The initial username is "admin" and the password can be retrieved as follows:
 kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d 
 ```
 
-We can now see that argocd already started to manage out apps, because they were generated according to the
-applicationset resources. If we add a new folder within a stage, e. g. `local-dev/<new_folder>`,
-the corresponding argocd application will be created automatically.
+We can now see that argocd starts to manage our apps, because they were generated from the applicationset.
+To add additional argocd apps, just add a folder inside localhost/ with the kustomization.yaml file describing your deployment.
