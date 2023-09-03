@@ -1,0 +1,20 @@
+---
+bases:
+  - ../../templates.yaml
+  - ../../environments.yaml
+
+releases:
+  - name: tekton-pipelines
+    chart: ./pipelines
+    inherit:
+      - template: default
+
+  - name: tekton-triggers
+    chart: ./triggers
+    inherit:
+      - template: default
+
+  - name: tekton-dashboard
+    chart: ./dashboard
+    inherit:
+      - template: default
