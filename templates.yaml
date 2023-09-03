@@ -1,0 +1,7 @@
+---
+templates:
+  default:
+    missingFileHandler: Warn
+    values:
+      - values.yaml
+      - values-{{ .Environment.Name }}.yaml

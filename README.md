@@ -1,19 +1,26 @@
 # Purpose
-This repo can be used to quickly bootstrap a full CI/CD setup using argocd and tekton on a local kubernetes installation,
-managed in a gitops way of deploying kubernetes apps.
+This repo can be used to bootstrap a CI/CD setup (and more) using argocd and tekton.
+The state of the installations is managed in a gitops-manner with helmfile and argocd.
 
 # Prerequisites
-A kubernetes installation + kubectl. Checkout the [microk8s repo](https://github.com/OlGe404/microk8s) to install and setup kubernetes.
+You need access to a kubernetes cluster and the kubectl cli.
+Checkout my [microk8s repo](https://github.com/OlGe404/microk8s) or [minikube repo](https://github.com/OlGe404/minikube) to quickly
+install and setup a local kubernetes cluster with one command.
 
 # Bootstrapping
-To let argocd manage our apps, we need to install it:
+To let argocd manage our apps, we need to template and install the YAML manifests for it first.
+
+**Ensure** you are logged in to the correct kubernetes cluster, because this will be a desctructive operation
+in the wrong kube context.
+
+Run:
 
 ```bash
-cd $(git rev-parse --show-toplevel) && kubectl apply -k localhost/argocd/
+cd $(git rev-parse --show-toplevel)
+make bootstrap
 ```
 
-Depending on how fast the argocd CRDs are established in your cluster, you might need to run the above command
-twice in a row to deploy the applicationset resource without getting an error.
+To create all deployments managed 
 
 ## ArgoCD login
 After all argocd pods are up and running, you can visit [the argocd UI](http://localhost:30002) to login.

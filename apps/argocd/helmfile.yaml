@@ -1,0 +1,12 @@
+---
+bases:
+  - ../../templates.yaml
+  - ../../environments.yaml
+
+releases:
+  - name: argocd
+    chart: ./base
+    namespace: argocd
+    createNamespace: true
+    inherit:
+      - template: default
