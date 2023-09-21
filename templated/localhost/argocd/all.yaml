@@ -20715,7 +20715,7 @@ spec:
         repoURL: https://github.com/OlGe404/gitops-setup.git
         targetRevision: HEAD
       destination:
-        namespace: argocd
+        namespace: '*'
         server: https://kubernetes.default.svc
       syncPolicy:
         automated:
