@@ -1,0 +1,68 @@
+# code: language=yaml
+---
+# Values for chart: argo/argocd-apps.
+
+projects:
+  - name: gitops-setup
+    namespace: argocd
+    description: Contains all apps generated from https://github.com/OlGe404/gitops-setup/tree/master/templated/{{ .Environment.Name }}.
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io/background
+
+    sourceRepos:
+      - https://github.com/OlGe404/gitops-setup.git
+
+    destinations:
+      - namespace: argocd
+        server: https://kubernetes.default.svc
+
+    clusterResourceWhitelist:
+      - "*"
+
+applicationsets:
+  - name: "{{ .Environment.Name }}"
+    namespace: argocd
+    generators:
+      - git:
+          repoURL: https://github.com/OlGe404/gitops-setup.git
+          revision: HEAD
+          directories:
+            - path: "templated/{{ .Environment.Name }}/*"
+
+    template:
+      metadata:
+        name: "{{ `{{ path.basename }}` }}"
+      spec:
+        project: gitops-setup
+        source:
+          repoURL: https://github.com/OlGe404/gitops-setup.git
+          targetRevision: HEAD
+          path: "{{ `{{ path }}` }}"
+
+        destination:
+          namespace: argocd
+          server: https://kubernetes.default.svc
+
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+
+# Values for argocd
+configs:
+  cm:
+    exec.enabled: true
+    timeout.reconciliation: 10s
+
+  params:
+    server.insecure: true
+    reposerver.parallelism.limit: 10
+
+dex:
+  enabled: false
+
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - argocd.test

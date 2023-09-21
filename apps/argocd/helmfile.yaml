@@ -1,12 +1,26 @@
 ---
 bases:
-  - ../../templates.yaml
-  - ../../environments.yaml
+  - ../../helmfile.d/templates.yaml
+  - ../../helmfile.d/environments.yaml
+
+repositories:
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
 
 releases:
   - name: argocd
-    chart: ./base
+    chart: argo/argo-cd
     namespace: argocd
     createNamespace: true
+    version: 5.46.6
+    inherit:
+      - template: default
+
+  - name: argocd-apps
+    chart: argo/argocd-apps
+    namespace: argocd
+    version: 1.4.1
+    needs:
+      - argocd
     inherit:
       - template: default

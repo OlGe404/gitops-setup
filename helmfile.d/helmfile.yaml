@@ -3,4 +3,4 @@ bases:
   - environments.yaml
 
 helmfiles:
-  - apps/*/helmfile.yaml
+  - ../apps/*/helmfile.yaml
