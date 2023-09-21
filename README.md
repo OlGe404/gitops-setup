@@ -1,41 +1,41 @@
 # Purpose
-This repo can be used to bootstrap a CI/CD setup (and more) using argocd and tekton.
-The state of the installations is managed in a gitops-manner with helmfile and argocd.
+This repo can be used to quickly bootstrap a CI/CD setup (and more) using argocd and tekton.
+The installation manifests are generated with helmfile and deployed with argocd.
 
 # Prerequisites
-You need access to a kubernetes cluster and the kubectl cli.
-Checkout my [microk8s repo](https://github.com/OlGe404/microk8s) or [minikube repo](https://github.com/OlGe404/minikube) to quickly
-install and setup a local kubernetes cluster with one command.
+First, you need a running kubernetes cluster to deploy the apps to. If you use my [minikube repo](https://github.com/OlGe404/minikube) 
+to install it, the configs (Ingress, Storage, etc.) for all apps in this repo will work out of the box.
+
+Second, you need these CLI tools:
+* make
+* helmfile
+* helm
+* kubectl
+* kustomize (comes with kubectl)
 
 # Bootstrapping
-To let argocd manage our apps, we need to template and install the YAML manifests for it first.
+To let argocd manage our apps, we need to install it first. You should check that you are logged in
+to the correct cluster because this can be a potentially destructive operation.
 
-**Ensure** you are logged in to the correct kubernetes cluster, because this will be a desctructive operation
-in the wrong kube context.
+Run `kubectl config current-context` to see which kubernetes cluster you are logged in.
 
-Run:
+To install argocd, run `cd $(git rev-parse --show-toplevel) && make bootstrap`. After ArgoCD is up and running,
+it will start deployen all manifests defined in `templated/localhost/*/all.yaml`.
 
-```bash
-cd $(git rev-parse --show-toplevel)
-make bootstrap
-```
-
-To create all deployments managed 
 
 ## ArgoCD login
-After all argocd pods are up and running, you can visit [the argocd UI](http://localhost:30002) to login.
-The initial username is "admin" and the password can be retrieved as follows:
+After all argocd pods are up and running, you can visit [the argocd UI](http://argocd.test) to login.
+The initial username is "admin" and the password can be retrieved with
 
 ```bash
 # Get password for the initial argocd admin user
-kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d 
+kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d  | xargs printf '%s \n'
 ```
 
-We can now see that argocd is starting to manage our apps, because they were generated from the applicationset.
-To deploy additional argocd apps, just add a folder inside localhost/ with the kustomization.yaml file describing your deployment.
-The applicationset controller will reconcile this repo every 3 minutes and automatically create the argocd applications for you
-based on the folders found.
+# Add more apps
+To add more apps to this gitops-setup, checkout how the other apps are defined, e.g. [argocd](apps/argocd/helmfile.yaml)
+and write a helmfile for your new app.
 
-## Tekton dashboard
-Tekton will be installed alongside argocd to have a fully fledged CI/CD setup running.
-The tekton-dashboard UI will be available [here](http://localhost:30003).
+Afterwards, run `cd $(git rev-parse --show-toplevel) && make` to template and write the manifests to
+`templates/localhost/<appName>/all.yaml`. The make target will add and commit the generated files for you.
+If you push them to the repository, argocd will pick them up automatically.

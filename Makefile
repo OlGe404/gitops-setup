@@ -9,11 +9,8 @@ templates:
 		git commit -m "[CI] make templates $(ENV)"; \
 	done
 
-sync:
-	helmfile sync -e $(ENV)
-
-delete:
-	helmfile delete -e $(ENV)
+bootstrap:
+	helmfile sync -e $(ENV) --selector app=argocd
 
 clean:
 	rm -rf templated/$(ENV)/

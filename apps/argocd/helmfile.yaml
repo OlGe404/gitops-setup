@@ -13,6 +13,8 @@ releases:
     namespace: argocd
     createNamespace: true
     version: 5.46.6
+    labels:
+      app: argocd
     inherit:
       - template: default
 
@@ -20,6 +22,8 @@ releases:
     chart: argo/argocd-apps
     namespace: argocd
     version: 1.4.1
+    labels:
+      app: argocd
     needs:
       - argocd
     inherit:
