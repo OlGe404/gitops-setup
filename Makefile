@@ -4,10 +4,11 @@ ENV ?= localhost
 
 templates:
 	for helmfile in apps/*/helmfile.yaml; do \
-		helmfile.d/helper.sh $(ENV) \
-		git add templated/$(ENV)/* \
-		git commit -m "[CI] make templates $(ENV)"; \
+		helmfile.d/helper.sh $(ENV); \
 	done
+
+	git add templated/$(ENV)/*
+	git commit -m "[CI] make templates $(ENV)"
 
 bootstrap:
 	helmfile sync -e $(ENV) --selector app=argocd
