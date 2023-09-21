@@ -20689,7 +20689,8 @@ spec:
     - namespace: argocd
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
-    - '*'
+    - group: '*'
+      kind: '*'
 ---
 # Source: argocd-apps/templates/applicationsets.yaml
 apiVersion: argoproj.io/v1alpha1

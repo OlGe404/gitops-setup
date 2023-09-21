@@ -4,7 +4,7 @@ ENV ?= localhost
 
 templates:
 	for helmfile in apps/*/helmfile.yaml; do \
-		./helper.sh $(ENV); \
+		helmfile.d/helper.sh $(ENV); \
 	done
 
 sync:
