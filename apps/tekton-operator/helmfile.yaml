@@ -4,5 +4,7 @@ bases:
   - ../../helmfile.d/environments.yaml
 
 releases:
-  - name: tekton-pipelines
+  - name: tekton-operator
     chart: ./kustomization
+    namespace: tekton-operator
+    createNamespace: true
