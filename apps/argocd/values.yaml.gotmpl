@@ -44,7 +44,7 @@ applicationsets:
           path: "{{ `{{ path }}` }}"
 
         destination:
-          namespace: argocd
+          namespace: "*"
           server: https://kubernetes.default.svc
 
         syncPolicy:
