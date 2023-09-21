@@ -1,0 +1,19 @@
+
+---
+# Source: kustomization/templates/kustomized.yaml
+# Source: kustomization/templates/kustomized.yaml
+apiVersion: operator.tekton.dev/v1alpha1
+kind: TektonConfig
+metadata:
+  name: config
+  namespace: tekton-operator
+spec:
+  profile: all
+  pruner:
+    keep: 100
+    resources:
+    - pipelinerun
+    - taskrun
+    schedule: 0 8 * * *
+  targetNamespace: tekton-pipelines
+
