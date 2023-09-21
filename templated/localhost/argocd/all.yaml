@@ -20686,7 +20686,7 @@ spec:
   sourceRepos:
     - https://github.com/OlGe404/gitops-setup.git
   destinations:
-    - namespace: argocd
+    - namespace: '*'
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
