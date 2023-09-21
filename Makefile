@@ -1,14 +1,20 @@
-.PHONY = helmfile-template
+.PHONY = templates sync delete clean helm-plugins
 
 ENV ?= localhost
 
-helmfile-template:
-	helmfile template -e $(ENV) --include-crds \
-	--output-dir-template "{{ .OutputDir }}/{{ .Release.Name }}" \
-	--output-dir $(PWD)/templated/$(ENV)
+templates:
+	for helmfile in apps/*/helmfile.yaml; do \
+		./helper.sh $(ENV); \
+	done
 
-bootstrap:
+sync:
 	helmfile sync -e $(ENV)
 
 delete:
 	helmfile delete -e $(ENV)
+
+clean:
+	rm -rf templated/$(ENV)/
+
+helm-plugins:
+	helm plugin install https://github.com/databus23/helm-diff --version v3.8.1
