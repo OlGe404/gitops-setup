@@ -4,7 +4,9 @@ ENV ?= localhost
 
 templates:
 	for helmfile in apps/*/helmfile.yaml; do \
-		helmfile.d/helper.sh $(ENV); \
+		helmfile.d/helper.sh $(ENV) \
+		git add templated/$(ENV)/* \
+		git commit -m "[CI] make templates $(ENV)"; \
 	done
 
 sync:
