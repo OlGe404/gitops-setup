@@ -1,4 +1,4 @@
-.PHONY = templates sync delete clean helm-plugins
+.PHONY = templates bootstrap clean helm-plugins
 
 ENV ?= localhost
 
@@ -6,9 +6,6 @@ templates: clean
 	for helmfile in apps/*/helmfile.yaml; do \
 		helmfile.d/helper.sh $(ENV); \
 	done
-
-	git add templated/$(ENV)/*
-	git commit -m "[CI] make templates $(ENV)"
 
 bootstrap: templates
 	helmfile sync -e $(ENV) --selector app=argocd
