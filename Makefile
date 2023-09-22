@@ -3,6 +3,7 @@
 ENV ?= localhost
 
 templates:
+	$(MAKE) clean
 	for helmfile in apps/*/helmfile.yaml; do \
 		helmfile.d/helper.sh $(ENV); \
 	done
