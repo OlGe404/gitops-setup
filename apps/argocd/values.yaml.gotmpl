@@ -48,6 +48,12 @@ applicationsets:
             prune: true
             selfHeal: true
 
+          syncOptions:
+            - Validate=false
+            - ServerSideApply=true
+            - ApplyOutOfSyncOnly=true
+            - FailOnSharedResource=true
+
 # Values for chart: argo/argo-cd
 configs:
   cm:
