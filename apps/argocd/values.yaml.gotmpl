@@ -23,8 +23,8 @@ applicationsets:
       - git:
           repoURL: https://github.com/OlGe404/gitops-setup.git
           revision: HEAD
-          files:
-            - path: "templated/{{ .Environment.Name }}/*.yaml"
+          directories:
+            - path: "templated/{{ .Environment.Name }}/*"
 
     template:
       metadata:

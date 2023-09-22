@@ -20699,8 +20699,8 @@ metadata:
 spec:
   generators:
     - git:
-        files:
-        - path: templated/localhost/*.yaml
+        directories:
+        - path: templated/localhost/*
         repoURL: https://github.com/OlGe404/gitops-setup.git
         revision: HEAD
   template:
