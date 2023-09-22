@@ -17,11 +17,17 @@ Second, you need these CLI tools to generate the deployment manifests for all ap
 To let argocd manage our apps, we need to install it first. You should check that you are logged in
 to the correct cluster because this can be a potentially destructive operation.
 
-Run `kubectl config current-context` to see which kubernetes cluster you are logged in. If you're logged
-in the correct cluster, run `cd $(git rev-parse --show-toplevel) && make bootstrap` to install argocd.
+Run `kubectl config current-context` to see which kubernetes cluster you are logged in to. If it's the correct cluster, run `cd $(git rev-parse --show-toplevel) && make bootstrap` to install argocd.
 
-After ArgoCD is up and running, it will start to deploy all manifests defined in `templated/localhost/*.yaml`
-because the applicationset will generate one argocd app per manifest found.
+After ArgoCD is up and running, it will start to deploy all manifests defined in `templated/localhost/*.yaml`. The applicationset controller will generate one argocd app per manifest found.
+
+The applicationset controller reconciles the changes in git periodically, but if you want to trigger it manually run
+
+```bash
+kubectl delete pod -n argocd -l app.kubernetes.io/component=applicationset-controller
+```
+
+to delete the pod which forces a reconciliation loop on boot.
 
 
 ## ArgoCD login
