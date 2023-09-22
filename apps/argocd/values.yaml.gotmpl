@@ -29,8 +29,6 @@ applicationsets:
     template:
       metadata:
         name: "{{ `{{ path.basename }}` }}"
-        finalizers:
-          - resources-finalizer.argocd.argoproj.io/background
 
       spec:
         project: gitops-setup
@@ -44,7 +42,9 @@ applicationsets:
           server: https://kubernetes.default.svc
 
         syncPolicy:
-          automated: {}
+          automated:
+            prune: false
+            selfHeal: false
 
           syncOptions:
             - Validate=false
