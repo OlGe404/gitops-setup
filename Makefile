@@ -2,8 +2,7 @@
 
 ENV ?= localhost
 
-templates:
-	$(MAKE) clean
+templates: clean
 	for helmfile in apps/*/helmfile.yaml; do \
 		helmfile.d/helper.sh $(ENV); \
 	done
@@ -11,7 +10,7 @@ templates:
 	git add templated/$(ENV)/*
 	git commit -m "[CI] make templates $(ENV)"
 
-bootstrap:
+bootstrap: templates
 	helmfile sync -e $(ENV) --selector app=argocd
 
 clean:
