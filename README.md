@@ -1,12 +1,12 @@
 # Purpose
 This repo can be used to quickly bootstrap a CI/CD setup (and more) using argocd and tekton.
-The installation manifests are generated with helmfile and deployed with argocd.
+The installation manifests are generated with helmfile + helm/kustomize and deployed with argocd.
 
 # Prerequisites
 First, you need a running kubernetes cluster to deploy the apps to. If you use my [minikube repo](https://github.com/OlGe404/minikube) 
 to install it, the configs (Ingress, Storage, etc.) for all apps in this repo will work out of the box.
 
-Second, you need these CLI tools:
+Second, you need these CLI tools to generate the deployment manifests for all apps:
 * make
 * helmfile
 * helm
@@ -17,25 +17,35 @@ Second, you need these CLI tools:
 To let argocd manage our apps, we need to install it first. You should check that you are logged in
 to the correct cluster because this can be a potentially destructive operation.
 
-Run `kubectl config current-context` to see which kubernetes cluster you are logged in.
+Run `kubectl config current-context` to see which kubernetes cluster you are logged in. If you're logged
+in the correct cluster, run `cd $(git rev-parse --show-toplevel) && make bootstrap` to install argocd.
 
-To install argocd, run `cd $(git rev-parse --show-toplevel) && make bootstrap`. After ArgoCD is up and running,
-it will start deployen all manifests defined in `templated/localhost/*/all.yaml`.
+After ArgoCD is up and running, it will start to deploy all manifests defined in `templated/localhost/*.yaml`
+because the applicationset will generate one argocd app per manifest found.
 
 
 ## ArgoCD login
-After all argocd pods are up and running, you can visit [the argocd UI](http://argocd.test) to login.
+After argocd is up and running, you can visit [the argocd UI](http://argocd.test) to login.
 The initial username is "admin" and the password can be retrieved with
 
 ```bash
-# Get password for the initial argocd admin user
 kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d  | xargs printf '%s \n'
 ```
 
 # Add more apps
-To add more apps to this gitops-setup, checkout how the other apps are defined, e.g. [argocd](apps/argocd/helmfile.yaml)
-and write a helmfile for your new app.
+To add more apps, checkout how the other apps are defined, e.g. [argocd](apps/argocd/helmfile.yaml) and write a helmfile for your new app.
 
 Afterwards, run `cd $(git rev-parse --show-toplevel) && make` to template and write the manifests to
-`templates/localhost/<appName>/all.yaml`. The make target will add and commit the generated files for you.
-If you push them to the repository, argocd will pick them up automatically.
+`templates/localhost/<appName>.yaml`. The make target will add and commit the generated files for you,
+you only have to push them manually. Once they are generated and pushed, the applicationset controller
+will generate the application and argocd deploys them.
+
+
+# Add more environments
+The goal of this repo is to quickly and easily generate/deploy argocd apps for local development purposes.
+However, the setup can easily be extended to work with any number of kubernetes clusters, locally or remote.
+
+To add a new environemnt (kubernetes cluster), add it to the [environments.yaml conf file](helmfile.d/environments.yaml) used by helmfile.
+You can then bootstrap the gitops setup as described in the #Bootstrapping section. The make target(s) and
+applicationset conf will work out-of-the-box with more than one environment and generate/create argocd applications
+automatically for each environment.
