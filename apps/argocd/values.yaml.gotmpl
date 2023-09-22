@@ -1,14 +1,10 @@
 # code: language=yaml
 ---
 # Values for chart: argo/argocd-apps.
-
 projects:
   - name: gitops-setup
     namespace: argocd
     description: Contains all apps generated from https://github.com/OlGe404/gitops-setup/tree/master/templated/{{ .Environment.Name }}.
-    finalizers:
-      - resources-finalizer.argocd.argoproj.io/background
-
     sourceRepos:
       - https://github.com/OlGe404/gitops-setup.git
 
