@@ -20723,8 +20723,8 @@ spec:
           backoff:
             duration: 5s
             factor: 2
-            maxDuration: 1h
-          limit: 15
+            maxDuration: 10m
+          limit: 100
         syncOptions:
         - Validate=false
         - ServerSideApply=true
