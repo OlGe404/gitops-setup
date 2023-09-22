@@ -20679,8 +20679,6 @@ kind: AppProject
 metadata:
   name: gitops-setup
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io/background
 spec:
   description: Contains all apps generated from https://github.com/OlGe404/gitops-setup/tree/master/templated/localhost.
   sourceRepos:
@@ -20701,8 +20699,8 @@ metadata:
 spec:
   generators:
     - git:
-        directories:
-        - path: templated/localhost/*
+        files:
+        - path: templated/localhost/*.yaml
         repoURL: https://github.com/OlGe404/gitops-setup.git
         revision: HEAD
   template:
