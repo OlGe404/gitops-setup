@@ -1144,6 +1144,25 @@ spec:
 ---
 # Source: kustomization/templates/kustomized.yaml
 # Source: kustomization/templates/kustomized.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tekton-dashboard
+  namespace: tekton-operator
+spec:
+  rules:
+  - host: tekton-dashboard.test
+    http:
+      paths:
+      - backend:
+          service:
+            name: tekton-dashboard
+            port:
+              number: 9097
+        pathType: ImplementationSpecific
+---
+# Source: kustomization/templates/kustomized.yaml
+# Source: kustomization/templates/kustomized.yaml
 apiVersion: operator.tekton.dev/v1alpha1
 kind: TektonConfig
 metadata:
