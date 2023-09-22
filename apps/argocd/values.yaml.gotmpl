@@ -44,13 +44,20 @@ applicationsets:
         syncPolicy:
           automated:
             prune: false
-            selfHeal: false
+            selfHeal: true
 
           syncOptions:
             - Validate=false
             - ServerSideApply=true
             - ApplyOutOfSyncOnly=true
             - FailOnSharedResource=true
+
+          retry:
+            limit: 15
+            backoff:
+              duration: 5s
+              factor: 2
+              maxDuration: 1h
 
 # Values for chart: argo/argo-cd
 configs:
