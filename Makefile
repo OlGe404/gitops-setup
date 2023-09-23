@@ -1,11 +1,10 @@
 .PHONY = templates bootstrap clean helm-plugins
 
 CLUSTER ?= localhost
+SELECTOR ?= place!=holder
 
-templates: clean
-	for helmfile in apps/*/helmfile.yaml; do \
-		helmfile.d/helper.sh $(CLUSTER); \
-	done
+templates:
+	helmfile.d/helper.sh $(CLUSTER) $(SELECTOR)
 
 	@DIFF=$$(git diff --name-only templated/$(CLUSTER)/ 2>/dev/null); \
 	if [ -n "$$DIFF" ]; then \
