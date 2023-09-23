@@ -38,15 +38,16 @@ applicationsets:
           path: "{{ `{{ path }}` }}"
 
         destination:
-          namespace: "{{ `{{ path.basename }}` }}"
+          namespace: argocd
           server: https://kubernetes.default.svc
 
         ignoreDifferences:
           - group: tekton.dev/v1beta1
             kind: Task
             jqPathExpressions:
-              - .spec.params[].type
-              - .spec.steps[].resources
+              - ".spec.params[].type"
+              - ".spec.results[].type"
+              - ".spec.steps[].resources"
 
         syncPolicy:
           automated:
