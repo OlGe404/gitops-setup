@@ -20430,7 +20430,7 @@ metadata:
     app.kubernetes.io/version: "v2.8.4"
 spec:
   rules:
-    - host: "argocd.test123"
+    - host: "argocd.test"
       http:
         paths:
           - path: /
