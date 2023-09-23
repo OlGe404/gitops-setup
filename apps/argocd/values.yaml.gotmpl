@@ -41,6 +41,13 @@ applicationsets:
           namespace: "{{ `{{ path.basename }}` }}"
           server: https://kubernetes.default.svc
 
+        ignoreDifferences:
+          - group: tekton.dev
+            kind: Task
+            jqPathExpressions:
+              - .spec.params[].type
+              - .spec.steps[].resources
+
         syncPolicy:
           automated:
             prune: true
