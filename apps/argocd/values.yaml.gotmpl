@@ -42,7 +42,7 @@ applicationsets:
           server: https://kubernetes.default.svc
 
         ignoreDifferences:
-          - group: tekton.dev/v1beta1
+          - group: "*"
             kind: Task
             jqPathExpressions:
               - ".spec.params[].type"
