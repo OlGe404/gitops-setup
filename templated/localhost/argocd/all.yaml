@@ -20500,9 +20500,9 @@ spec:
         - ApplyOutOfSyncOnly=true
         - FailOnSharedResource=true
       ignoreDifferences:
-        - group: '*'
+        - group: tekton.dev
           jqPathExpressions:
           - .spec.params[].type
           - .spec.results[].type
           - .spec.steps[].resources
-          kind: Task
+          kind: '*'
