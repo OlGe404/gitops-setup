@@ -20499,3 +20499,9 @@ spec:
         - ServerSideApply=true
         - ApplyOutOfSyncOnly=true
         - FailOnSharedResource=true
+      ignoreDifferences:
+        - group: tekton.dev
+          jqPathExpressions:
+          - .spec.params[].type
+          - .spec.steps[].resources
+          kind: Task
