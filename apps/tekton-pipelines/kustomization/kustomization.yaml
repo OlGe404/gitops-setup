@@ -1,0 +1,3 @@
+---
+resources:
+  - https://raw.githubusercontent.com/tektoncd/catalog/main/pipeline/buildpacks/0.2/buildpacks.yaml

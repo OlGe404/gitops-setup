@@ -1,0 +1,11 @@
+---
+bases:
+  - ../../helmfile.d/templates.yaml
+  - ../../helmfile.d/environments.yaml
+
+releases:
+  - name: tekton-pipelines
+    chart: ./kustomization
+    namespace: tekton-pipelines
+    labels:
+      app: tekton-pipelines
