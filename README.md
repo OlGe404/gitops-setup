@@ -19,7 +19,7 @@ to the correct cluster because this can be a potentially destructive operation.
 
 Run `kubectl config current-context` to see which kubernetes cluster you are logged in to. If it's the correct cluster, run `cd $(git rev-parse --show-toplevel) && make bootstrap` to install argocd.
 
-After ArgoCD is up and running, it will start to deploy all manifests defined in `templated/localhost/*.yaml`. The applicationset controller will generate one argocd app per manifest found.
+After ArgoCD is up and running, it will start to deploy all manifests defined in `templated/<CLUSTER>/*.yaml`. The applicationset controller will generate one argocd app per manifest found.
 
 The applicationset controller reconciles the changes in git periodically, but if you want to trigger it manually run
 
@@ -55,3 +55,8 @@ To add a new environemnt (kubernetes cluster), add it to the [environments.yaml 
 You can then bootstrap the gitops setup as described in the #Bootstrapping section. The make target(s) and
 applicationset conf will work out-of-the-box with more than one environment and generate/create argocd applications
 automatically for each environment.
+
+# Template a specific app
+To generate the templates for all apps, run `make`.
+To generate the templates for a specific app, run `SELECTOR="<key>=<value> make`. The key/values can be found
+by inspecting the "labels" for the releases in the helmfiles.
