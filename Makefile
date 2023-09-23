@@ -12,7 +12,6 @@ templates:
 		git commit -m "[CI] CLUSTER=$(CLUSTER) make templates"; \
 	fi
 
-
 bootstrap: templates
 	helmfile sync -e $(CLUSTER) --selector app=argocd
 
