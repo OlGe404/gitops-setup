@@ -7,7 +7,7 @@ templates: clean
 		helmfile.d/helper.sh $(CLUSTER); \
 	done
 
-	@DIFF=$$(git diff --name-only templated/$(CLUSTER)/ 2>/dev/null | true); \
+	@DIFF=$$(git diff --name-only templated/$(CLUSTER)/ 2>/dev/null); \
 	if [ -n "$$DIFF" ]; then \
 		git add templated/$(CLUSTER)/*; \
 		git commit -m "[CI] CLUSTER=$(CLUSTER) make templates"; \
