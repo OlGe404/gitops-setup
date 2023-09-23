@@ -7,6 +7,5 @@ releases:
   - name: tekton-tasks
     chart: ./kustomization
     namespace: tekton-tasks
-    createNamespace: true
     labels:
       app: tekton-tasks
