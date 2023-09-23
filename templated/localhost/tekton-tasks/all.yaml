@@ -2,6 +2,13 @@
 ---
 # Source: kustomization/templates/kustomized.yaml
 # Source: kustomization/templates/kustomized.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tekton-tasks
+---
+# Source: kustomization/templates/kustomized.yaml
+# Source: kustomization/templates/kustomized.yaml
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
