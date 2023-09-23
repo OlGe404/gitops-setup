@@ -20482,7 +20482,7 @@ spec:
         repoURL: https://github.com/OlGe404/gitops-setup.git
         targetRevision: HEAD
       destination:
-        namespace: '{{ path.basename }}'
+        namespace: argocd
         server: https://kubernetes.default.svc
       syncPolicy:
         automated:
@@ -20503,5 +20503,6 @@ spec:
         - group: tekton.dev/v1beta1
           jqPathExpressions:
           - .spec.params[].type
+          - .spec.results[].type
           - .spec.steps[].resources
           kind: Task
