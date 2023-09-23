@@ -7,6 +7,13 @@ templates: clean
 		helmfile.d/helper.sh $(CLUSTER); \
 	done
 
+	@DIFF=$$(git diff --name-only templated/$(CLUSTER)/ 2>/dev/null | true); \
+	if [ -n "$$DIFF" ]; then \
+		git add templated/$(CLUSTER)/*; \
+		git commit -m "[CI] CLUSTER=$(CLUSTER) make templates"; \
+	fi
+
+
 bootstrap: templates
 	helmfile sync -e $(CLUSTER) --selector app=argocd
 
