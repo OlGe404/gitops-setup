@@ -1000,8 +1000,8 @@ metadata:
   labels:
     app: tekton-operator
     name: tekton-operator-webhook
-    operator.tekton.dev/release: devel
-    version: devel
+    operator.tekton.dev/release: v0.68.0
+    version: v0.68.0
   name: tekton-operator-webhook
   namespace: tekton-operator
 spec:
@@ -1052,13 +1052,13 @@ spec:
         - name: OPERATOR_NAME
           value: tekton-operator
         - name: IMAGE_PIPELINES_PROXY
-          value: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/proxy-webhook:v0.68.0@sha256:04dccb43715fd3156c754d324279f8f59685cf3f41462b82a628f4a98b5de282
+          value: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/proxy-webhook:v0.68.0@sha256:0346cf75cde4b8142e1c19d0f2f94a83ad1b1b9e5c32c1da6c9d92980b2dca58
         - name: IMAGE_JOB_PRUNER_TKN
           value: gcr.io/tekton-releases/dogfooding/tkn@sha256:a572f1748eb5c0e8002dd0a83ee836ad9d755d035cbd5bfbdef5de810d2bea0b
         - name: METRICS_DOMAIN
           value: tekton.dev/operator
         - name: VERSION
-          value: devel
+          value: v0.68.0
         - name: CONFIG_OBSERVABILITY_NAME
           value: tekton-config-observability
         - name: AUTOINSTALL_COMPONENTS
@@ -1071,7 +1071,7 @@ spec:
             configMapKeyRef:
               key: DEFAULT_TARGET_NAMESPACE
               name: tekton-config-defaults
-        image: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/operator:v0.68.0@sha256:5aa798a55e1f1f146dc75fc95fb8d0ea005b488c799e70f05aa1341726a6f968
+        image: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/operator:v0.68.0@sha256:441fbf28659e9a473454824d2d4961c4b1b392d829d36e23d11eafaac8cb1789
         imagePullPolicy: Always
         name: tekton-operator-lifecycle
       - args:
@@ -1093,10 +1093,10 @@ spec:
         - name: PROFILING_PORT
           value: "9009"
         - name: VERSION
-          value: devel
+          value: v0.68.0
         - name: METRICS_DOMAIN
           value: tekton.dev/operator
-        image: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/operator:v0.68.0@sha256:5aa798a55e1f1f146dc75fc95fb8d0ea005b488c799e70f05aa1341726a6f968
+        image: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/operator:v0.68.0@sha256:441fbf28659e9a473454824d2d4961c4b1b392d829d36e23d11eafaac8cb1789
         imagePullPolicy: Always
         name: tekton-operator-cluster-operations
       serviceAccountName: tekton-operator
@@ -1136,7 +1136,7 @@ spec:
           value: tekton-operator-webhook-certs
         - name: METRICS_DOMAIN
           value: tekton.dev/operator
-        image: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/webhook:v0.68.0@sha256:de42b1a908415933a982ae205f33e98b834ef106280d4b8f55546b99537a9af3
+        image: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/webhook:v0.68.0@sha256:60d16e785d43d43eff79785e8f3216cd68dc3aca249f5e709c4bf93ebc5e85a6
         name: tekton-operator-webhook
         ports:
         - containerPort: 8443
@@ -1161,8 +1161,8 @@ spec:
   targetNamespace: tekton-pipelines
 
 ---
-# Source: dashboard/templates/kustomized.yaml
-# Source: dashboard/templates/kustomized.yaml
+# Source: tekton-dashboard/templates/kustomized.yaml
+# Source: tekton-dashboard/templates/kustomized.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -1179,4 +1179,3 @@ spec:
             port:
               number: 9097
         pathType: ImplementationSpecific
-

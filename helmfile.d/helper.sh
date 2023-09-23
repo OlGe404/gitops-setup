@@ -1,9 +1,13 @@
 #!/bin/bash
 
-ENV=$1
+CLUSTER=$1
 
 for helmfile in apps/*/helmfile.yaml; do
-    appName=$(echo $helmfile | cut -d '/' -f2)
-    mkdir -p templated/$ENV/$appName
-    helmfile template -e $ENV -f $helmfile --include-crds > templated/$ENV/$appName/all.yaml
+    APPNAME=$(echo $helmfile | cut -d '/' -f2)
+    TEMPLATED=$(helmfile template -e $CLUSTER -f $helmfile --include-crds) 
+    
+    if [[ -n $TEMPLATED ]]; then
+        mkdir -p templated/$CLUSTER/$APPNAME
+        echo "$TEMPLATED" > templated/$CLUSTER/$APPNAME/all.yaml
+    fi
 done

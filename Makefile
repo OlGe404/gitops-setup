@@ -1,17 +1,17 @@
 .PHONY = templates bootstrap clean helm-plugins
 
-ENV ?= localhost
+CLUSTER ?= localhost
 
 templates: clean
 	for helmfile in apps/*/helmfile.yaml; do \
-		helmfile.d/helper.sh $(ENV); \
+		helmfile.d/helper.sh $(CLUSTER); \
 	done
 
 bootstrap: templates
-	helmfile sync -e $(ENV) --selector app=argocd
+	helmfile sync -e $(CLUSTER) --selector app=argocd
 
 clean:
-	rm -rf templated/$(ENV)/
+	rm -rf templated/$(CLUSTER)/
 
 helm-plugins:
 	helm plugin install https://github.com/databus23/helm-diff --version v3.8.1

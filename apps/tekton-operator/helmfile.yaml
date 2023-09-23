@@ -8,7 +8,11 @@ releases:
     chart: ./kustomization
     namespace: tekton-operator
     createNamespace: true
+    labels:
+      app: tekton-operator
 
   - name: tekton-dashboard
-    chart: ./kustomization/dashboard
+    chart: ./kustomization/tekton-dashboard
     namespace: tekton-pipelines
+    labels:
+      app: tekton-operator
