@@ -1,9 +1,0 @@
----
-templates:
-  default:
-    missingFileHandler: Info
-    values:
-      - values.yaml
-      - values.yaml.gotmpl
-      - values-{{ .Environment.Name }}.yaml
-      - values-{{ .Environment.Name }}.yaml.gotmpl
