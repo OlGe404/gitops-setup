@@ -38,7 +38,7 @@ applicationsets:
           path: "{{ `{{ path }}` }}"
 
         destination:
-          namespace: argocd
+          namespace: "{{ `{{ path.basename }}` }}"
           server: https://kubernetes.default.svc
 
         ignoreDifferences:
