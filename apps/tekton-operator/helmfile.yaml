@@ -1,12 +1,12 @@
 ---
 bases:
+  - ../../helmfile.d/templates.yaml
   - ../../helmfile.d/environments.yaml
 
 releases:
   - name: tekton-operator
     chart: ./kustomization
     namespace: tekton-operator
-    createNamespace: true
     labels:
       app: tekton-operator
 

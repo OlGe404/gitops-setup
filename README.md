@@ -43,9 +43,7 @@ To add more apps, checkout how the other apps are defined, e.g. [argocd](apps/ar
 
 Afterwards, run `cd $(git rev-parse --show-toplevel) && make` to template and write the manifests to
 `templates/localhost/<appName>.yaml`. The make target will add and commit the generated files for you,
-you only have to push them manually. Once they are generated and pushed, the applicationset controller
-will generate the application and argocd deploys them.
-
+you only have to push them. The applicationset controller will generate the application and argocd deploys them.
 
 # Add more environments
 The goal of this repo is to quickly and easily generate/deploy argocd apps for local development purposes.

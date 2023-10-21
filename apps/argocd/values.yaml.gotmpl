@@ -60,9 +60,10 @@ applicationsets:
             - ServerSideApply=true
             - ApplyOutOfSyncOnly=true
             - FailOnSharedResource=true
+            - CreateNamespace=true
 
           retry:
-            limit: 100
+            limit: 10
             backoff:
               duration: 5s
               factor: 2
