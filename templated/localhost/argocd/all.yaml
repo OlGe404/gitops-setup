@@ -20493,12 +20493,13 @@ spec:
             duration: 5s
             factor: 2
             maxDuration: 10m
-          limit: 100
+          limit: 10
         syncOptions:
         - Validate=false
         - ServerSideApply=true
         - ApplyOutOfSyncOnly=true
         - FailOnSharedResource=true
+        - CreateNamespace=true
       ignoreDifferences:
         - group: tekton.dev
           jqPathExpressions:
